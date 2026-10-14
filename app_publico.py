@@ -319,3 +319,97 @@ st.download_button(
     file_name="Valuation_Iochpe_Maxion_calculado.xlsx",
     mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
 )
+from pathlib import Path
+import streamlit.components.v1 as components
+st.set_page_config(page_title="Valuation Iochpe-Maxion | TCC", layout="wide")
+st.title("Valuation Iochpe-Maxion — análise dinâmica")
+
+st.set_page_config(
+    page_title="Valuation Iochpe-Maxion | TCC",
+    layout="wide"
+)
+
+# Carrega o visual existente sem alterar os cálculos
+hero_path = Path(__file__).parent / "hero_maxion.html"
+
+if hero_path.exists():
+    hero_html = hero_path.read_text(encoding="utf-8")
+
+    # Ajusta a altura do visual para exibição no Streamlit
+    ajuste_css = """
+    <style>
+    html, body {
+        height: 420px !important;
+        min-height: 420px !important;
+        margin: 0 !important;
+        overflow: hidden !important;
+    }
+    .hero {
+        height: 420px !important;
+        min-height: 420px !important;
+    }
+    </style>
+    """
+
+    hero_html = hero_html.replace(
+        "</head>",
+        ajuste_css + "</head>",
+        1
+    )
+
+    components.html(
+        hero_html,
+        height=430,
+        scrolling=False
+    )
+else:
+    st.warning(
+        "Arquivo hero_maxion.html não encontrado. "
+        "Confira se ele está no repositório."
+    )
+
+st.title("Valuation Iochpe-Maxion — análise dinâmica")
+from pathlib import Path
+import streamlit.components.v1 as components
+from io import BytesIO
+import math
+import re
+import unicodedata
+from pathlib import Path
+
+import numpy as np
+import numpy_financial as npf
+import pandas as pd
+import streamlit as st
+import streamlit.components.v1 as components
+st.set_page_config(page_title="Valuation Iochpe-Maxion | TCC", layout="wide")
+st.title("Valuation Iochpe-Maxion — análise dinâmica")
+st.caption("Os resultados são recalculados com base no arquivo histórico importado e nas premissas editáveis. Valores financeiros em R$ milhões, salvo indicação contrária.")
+
+st.set_page_config(
+    page_title="Valuation Iochpe-Maxion | TCC",
+    layout="wide"
+)
+
+# Cabeçalho visual
+hero_path = Path(__file__).parent / "hero_maxion.html"
+
+if hero_path.exists():
+    hero_html = hero_path.read_text(encoding="utf-8")
+    components.html(
+        hero_html,
+        height=430,
+        scrolling=False
+    )
+else:
+    st.warning(
+        "Não foi encontrado o arquivo hero_maxion.html "
+        "na pasta do aplicativo."
+    )
+
+st.title("Valuation Iochpe-Maxion — análise dinâmica")
+st.caption(
+    "Os resultados são recalculados com base no arquivo histórico "
+    "importado e nas premissas editáveis. Valores financeiros em "
+    "R$ milhões, salvo indicação contrária."
+)
